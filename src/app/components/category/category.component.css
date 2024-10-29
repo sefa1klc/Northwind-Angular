@@ -1,0 +1,9 @@
+.selected-category {
+  outline: 2px solid #379a00;
+  outline-offset: -2px;
+  cursor: pointer;
+  background-color: #f0f8e0;
+  transition: background-color 0.3s;
+}
+
+

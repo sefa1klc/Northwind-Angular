@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <div class="table-responsive" style="margin-top: 141px">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Categories</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        routerLink = "/products"
+        [class]="getAllCategoryClass()">
+        <td>All Products</td>
+      </tr>
+      <tr
+        (click)="setCurretCategory(category)"
+        routerLink = "/products/category/{{category.categoryID}}"
+        *ngFor="let category of categories"
+        [class]="getCurrentCategoryClass(category)">
+        <td>{{ category.categoryName }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

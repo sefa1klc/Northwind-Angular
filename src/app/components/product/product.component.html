@@ -1,0 +1,36 @@
+<div *ngIf="!dataLoaded" style="position: fixed; top: 40%; left: 60%; transform: translate(-50%, -50%); z-index: 9999;">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="mb-3" style="margin-top: 80px; margin-left: 12px;">
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search Product">
+</div>
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Product ID</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Category ID</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Unit Price With Vat</th>
+        <th scope="col">Units In Stock</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products | filterPipe:filterText">
+        <td>{{ product.productID }}</td>
+        <td>{{ product.productName |uppercase}}</td>
+        <td>{{ product.categoryID}}</td>
+        <td>{{ product.unitPrice | currency }}</td>
+        <td>{{ product.unitPrice |vatAdded:18 | currency }}</td>
+        <td>{{ product.unitsInStock }}</td>
+        <td><button (click)="addToCart(product)" class = "btn btn-success">Add to Cart</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
