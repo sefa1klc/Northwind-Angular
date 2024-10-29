@@ -5,6 +5,8 @@ import {ListResponseModel} from "../models/listResponseModel";
 import {Product} from "../models/product";
 import {Category} from "../models/category";
 import {ResponseModel} from "../models/responseModel";
+import {ToastrService} from "ngx-toastr";
+import {response} from "express";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ import {ResponseModel} from "../models/responseModel";
 export class ProductService {
 
   apiUrl = "https://localhost:7277/api/";
-  constructor(private httpClient: HttpClient) {  }
+  constructor(private httpClient: HttpClient,
+              private toastrService: ToastrService) {  }
 
   getProducts() : Observable<ListResponseModel<Product>>{
     let newPath = this.apiUrl + "products/getall"

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import {ToastrModule} from "ngx-toastr";
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import {authInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
     VatAddedPipe,
     FilterPipePipe,
     CartSummaryComponent,
-    ProductAddComponent
+    ProductAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
     })
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {provide:HTTP_INTERCEPTORS, useClass:authInterceptor,multi: true},
   ],
   bootstrap: [AppComponent]
 })
